@@ -15,3 +15,5 @@ $folders = @(
 foreach ($folder in $folders) {
     New-Item -Path $folder -ItemType Directory -Force
 }
+
+cd ..
