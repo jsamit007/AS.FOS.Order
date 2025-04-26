@@ -12,7 +12,7 @@ dcoker pull rabbitmq
 ```
 5. Run these images follow this - [Link Text](./Docs/docker-basics-command.md)
 6. Now install Postgres client App (Server not required as it is already installed in docker) - https://www.pgadmin.org/download/
-7. Connect to PGAdmin and Execute this script [Link Test](./AS.FOS.Order.Persistence/order.sql)
+7. Connect to PGAdmin and Execute this script [Link Text](./AS.FOS.Order.Persistence/order.sql)
 8. Now execute this data seed script - [Link Text](./Docs/initial-script.sql)
 9. Now Start the Application
 10. Test APIs - [Link Text](./Docs/order-apis.http)
