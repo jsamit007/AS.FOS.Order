@@ -1,0 +1,26 @@
+### Create an Order
+POST https://localhost:7134/api/v1/order
+Content-Type: application/json
+
+{
+  "customerId": "7ddaf8ba-065a-43a9-a50f-ee24c39d8b7d",
+  "restaurantId": "550e8400-e29b-41d4-a716-446655440000",
+  "deliveryAddress": {
+    "street": "Hirai Sitai Road",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "zipCode": "411057"
+  },
+  "items": [
+    {
+      "productId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+      "quantity": 2,
+      "price": 67
+    }
+  ]
+}
+
+### track An Order
+GET https://localhost:7134/api/v1/order/77036b98-c103-4a61-850c-77ab754bed21
+Accept: application/json
+
