@@ -10,4 +10,8 @@ public abstract class BaseEntity<T> where T: BaseId<Guid>
     {
         Id = id;
     }
+    protected BaseEntity()
+    {
+        
+    }
 }

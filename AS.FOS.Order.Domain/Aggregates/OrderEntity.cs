@@ -13,13 +13,18 @@ public class OrderEntity : AggregateRoot<OrderId>
     public OrderId Id { get; private set; }
     public CustomerId CustomerId { get; private set; }
     public RestaurantId RestaurantId { get; private set; }
-    public ValueObjects.OrderEntity DeliveryAddress { get; private set; }
+    public DeliveryAddress DeliveryAddress { get; private set; }
     public OrderStatus Status { get; private set; }
     private readonly List<OrderItem> _items;
 
     public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
 
-    public OrderEntity(CustomerId customerId, RestaurantId restaurantId, ValueObjects.OrderEntity deliveryAddress)
+    public OrderEntity()
+    {
+        
+    }
+
+    public OrderEntity(CustomerId customerId, RestaurantId restaurantId, DeliveryAddress deliveryAddress)
     {
         Id = new OrderId(Guid.NewGuid());
         CustomerId = customerId ?? throw new ArgumentNullException(nameof(customerId));

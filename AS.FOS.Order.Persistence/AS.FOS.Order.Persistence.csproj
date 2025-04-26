@@ -8,9 +8,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.4">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+	  </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AS.FOS.Order.Application\AS.FOS.Order.Application.csproj" />
     <ProjectReference Include="..\AS.FOS.Order.Domain\AS.FOS.Order.Domain.csproj" />
   </ItemGroup>
 

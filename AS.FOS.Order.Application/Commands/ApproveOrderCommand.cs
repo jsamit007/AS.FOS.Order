@@ -1,4 +1,7 @@
-﻿namespace AS.FOS.Order.Application.Commands;
+﻿using AS.FOS.Order.Application.Response;
+using MediatR;
 
-public record ApproveOrderCommand(Guid OrderId);
+namespace AS.FOS.Order.Application.Commands;
+
+public record ApproveOrderCommand(Guid OrderId) : IRequest<ApproveOrderResponse>;
 

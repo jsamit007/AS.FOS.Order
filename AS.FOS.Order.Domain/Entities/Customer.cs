@@ -17,4 +17,9 @@ public class Customer : BaseEntity<CustomerId>
         PhoneNumber = phoneNumber;
         IsActive = isActive;
     }
+
+    public Customer()
+    {
+        
+    }
 }

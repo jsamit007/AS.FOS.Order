@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
+	
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AS.FOS.App.Common\AS.FOS.App.Common.csproj" />
+    <ProjectReference Include="..\AS.FOS.Order.Infrastructure\AS.FOS.Order.Infrastructure.csproj" />
+    <ProjectReference Include="..\AS.FOS.Order.Persistence\AS.FOS.Order.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

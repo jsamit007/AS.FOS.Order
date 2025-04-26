@@ -12,6 +12,7 @@ internal class AddressConfiguration : IEntityTypeConfiguration<Domain.Aggregates
             address.Property(a => a.Street).IsRequired();
             address.Property(a => a.City).IsRequired();
             address.Property(a => a.ZipCode).IsRequired();
+
         });
     }
 }

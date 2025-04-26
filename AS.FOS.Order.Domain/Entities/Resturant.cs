@@ -11,6 +11,11 @@ public class Resturant : BaseEntity<RestaurantId>
     {
     }
 
+    public Resturant()
+    {
+        
+    }
+
     public RestaurantId RestaurantId { get; }
     public bool IsOpen { get; } 
 }
