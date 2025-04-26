@@ -1,4 +1,6 @@
-﻿namespace AS.FOS.App.Common.Domain.Event;
+﻿using AS.FOS.App.Common.Application.Events;
+
+namespace AS.FOS.App.Common.Domain.Event;
 
 public interface IDomainEvent
 {

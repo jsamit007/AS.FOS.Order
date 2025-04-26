@@ -17,11 +17,12 @@ internal class OrderRepository : IOrderRepository
     public async Task AddAsync(OrderEntity order)
     {
         await _context.Orders.AddAsync(order);
+        await _context.SaveChangesAsync();
     }
 
     public async Task<OrderEntity> GetByIdAsync(Guid orderId, CancellationToken token)
     {
-        return await _context.Orders.Include(x => x.Items).FirstOrDefaultAsync(x => x.Id.Value == orderId);
+        return await _context.Orders.Include(x => x.Items).FirstOrDefaultAsync(x => x.Id == orderId);
     }
 
     public async Task UpdateAsync(OrderEntity order)

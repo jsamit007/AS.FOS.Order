@@ -17,6 +17,6 @@ internal class ResturantRepository : IResturantRepository
     {
         return _context.Resturants
             .AsNoTracking()
-            .FirstOrDefault(x => x.Id == restaurantId) != null;
+            .FirstOrDefault(x => x.RestaurantId == restaurantId) != null;
     }
 }

@@ -25,7 +25,7 @@ public class OrderController : ControllerBase
         return CreatedAtAction(nameof(GetOrderById), new { OrderId = order.OrderId }, order);
     }
 
-    [HttpGet("{id:guid}")]
+    [HttpGet("{orderId:guid}")]
     [ProducesResponseType(typeof(TrackOrderResponse), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetOrderById(Guid orderId)
     {

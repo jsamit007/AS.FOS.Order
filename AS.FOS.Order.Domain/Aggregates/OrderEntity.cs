@@ -42,11 +42,16 @@ public class OrderEntity : AggregateRoot<OrderId>
 
     public void Create()
     {
-        if (Status != OrderStatus.Initiated)
+        if (Status != OrderStatus.Pending)
             throw new InvalidOperationException("Only pending orders can be initiated.");
 
-        Status = OrderStatus.Pending;
-        AddDomainEvent(new OrderCreatedDomainEvent(this));
+        AddDomainEvent(new OrderCreatedDomainEvent 
+        {
+            CustomerId = CustomerId.Value,
+            OrderId = Id.Value,
+            Amount = _items.Sum(i => i.Price * i.Quantity),
+            ResturantId = RestaurantId.Value
+        });
     }
 
     public void Approve()

@@ -1,4 +1,4 @@
-﻿using AS.FOS.App.Common.Application;
+﻿using AS.FOS.App.Common.Application.Events;
 using AS.FOS.App.Common.Domain.Event;
 using MassTransit;
 

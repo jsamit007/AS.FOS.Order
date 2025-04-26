@@ -1,17 +1,12 @@
-﻿
-
-using AS.FOS.App.Common.Domain.Event;
-using AS.FOS.Order.Domain.Aggregates;
+﻿using AS.FOS.App.Common.Domain.Event;
 
 namespace AS.FOS.Order.Domain.Events;
 
 internal class OrderCreatedDomainEvent : IDomainEvent
 {
     public DateTime OccurredOn => DateTime.UtcNow;
-    public OrderEntity Order { get; }
-
-    public OrderCreatedDomainEvent(OrderEntity order)
-    {
-        Order = order;
-    }
+    public decimal Amount { get; init; }
+    public Guid OrderId { get; init; }
+    public Guid CustomerId { get; init; }
+    public Guid ResturantId { get; init; }
 }

@@ -1,4 +1,4 @@
-﻿using AS.FOS.App.Common.Application;
+﻿using AS.FOS.App.Common.Application.Events;
 using AS.FOS.App.Common.Domain.ValueObject;
 using AS.FOS.Order.Application.Commands;
 using AS.FOS.Order.Application.Interfaces;
@@ -39,7 +39,7 @@ internal class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, C
         {
             throw new Exception("Restaurant is closed");
         }
-        var order = new Domain.Aggregates.OrderEntity(new CustomerId(request.CustomerId), new RestaurantId(request.RestaurantId), _mapper.Map<DeliveryAddress>(request.DeliveryAddress));
+        var order = new OrderEntity(new CustomerId(request.CustomerId), new RestaurantId(request.RestaurantId), _mapper.Map<DeliveryAddress>(request.DeliveryAddress));
 
         foreach (var item in request.Items)
         {

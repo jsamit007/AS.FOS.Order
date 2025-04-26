@@ -1,4 +1,4 @@
-﻿using AS.FOS.App.Common.Application;
+﻿using AS.FOS.App.Common.Application.Events;
 using AS.FOS.Order.Application.Commands;
 using AS.FOS.Order.Application.Interfaces;
 using AS.FOS.Order.Application.Response;
