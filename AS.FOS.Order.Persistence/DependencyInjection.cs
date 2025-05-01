@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("AS.FOS.Order.UnitTests")]
 
 namespace AS.FOS.Order.Persistence;
 
@@ -14,7 +17,7 @@ public static class DependencyInjection
     {
         services.AddDbContext<OrderDBContext>(options =>
         {
-            var connection = configuration.GetConnectionString("DefaultConnection");
+            var connection = configuration.GetConnectionString("OrderDb");
             options.UseNpgsql(connection)
                 .EnableSensitiveDataLogging()
                 .LogTo(Console.WriteLine, LogLevel.Information);

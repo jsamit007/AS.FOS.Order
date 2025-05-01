@@ -1,0 +1,36 @@
+# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+# This stage is used when running from VS in fast mode (Default for Debug configuration)
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER app
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
+
+# This stage is used to build the service project
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["AS.FOS.Order.API/AS.FOS.Order.API.csproj", "AS.FOS.Order.API/"]
+COPY ["AS.FOS.App.Common/AS.FOS.App.Common.csproj", "AS.FOS.App.Common/"]
+COPY ["AS.FOS.Order.Application/AS.FOS.Order.Application.csproj", "AS.FOS.Order.Application/"]
+COPY ["AS.FOS.Order.Domain/AS.FOS.Order.Domain.csproj", "AS.FOS.Order.Domain/"]
+COPY ["AS.FOS.Order.Core/AS.FOS.Order.Core.csproj", "AS.FOS.Order.Core/"]
+COPY ["AS.FOS.Order.Infrastructure/AS.FOS.Order.Infrastructure.csproj", "AS.FOS.Order.Infrastructure/"]
+COPY ["AS.FOS.Order.Persistence/AS.FOS.Order.Persistence.csproj", "AS.FOS.Order.Persistence/"]
+RUN dotnet restore "./AS.FOS.Order.API/AS.FOS.Order.API.csproj"
+COPY . .
+WORKDIR "/src/AS.FOS.Order.API"
+RUN dotnet build "./AS.FOS.Order.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# This stage is used to publish the service project to be copied to the final stage
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./AS.FOS.Order.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "AS.FOS.Order.API.dll"]

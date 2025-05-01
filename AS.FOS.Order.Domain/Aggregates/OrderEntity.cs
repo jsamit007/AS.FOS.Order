@@ -57,7 +57,7 @@ public class OrderEntity : AggregateRoot<OrderId>
     public void Approve()
     {
         if (Status != OrderStatus.Paid)
-            throw new InvalidOperationException("Only initiated orders can be approved.");
+            throw new InvalidOperationException("Only paid orders can be approved.");
 
         Status = OrderStatus.Approved;
         AddDomainEvent(new OrderApprovedDomainEvent(this));
@@ -65,8 +65,8 @@ public class OrderEntity : AggregateRoot<OrderId>
 
     public void Pay()
     {
-        if (Status != OrderStatus.Approved)
-            throw new InvalidOperationException("Only approved orders can be paid.");
+        if (Status != OrderStatus.Pending)
+            throw new InvalidOperationException("Only pending orders can be paid.");
 
         Status = OrderStatus.Paid;
         AddDomainEvent(new OrderPaidDomainEvent(this));

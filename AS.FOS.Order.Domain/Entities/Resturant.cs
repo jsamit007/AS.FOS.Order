@@ -9,6 +9,7 @@ public class Resturant : BaseEntity<RestaurantId>
 {
     public Resturant(RestaurantId id) : base(id)
     {
+        RestaurantId = id;
     }
 
     public Resturant()

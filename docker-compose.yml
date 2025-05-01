@@ -1,0 +1,58 @@
+services:
+  as.fos.order.api:
+    image: ${DOCKER_REGISTRY-}as.fos.order.api
+    build:
+      context: .
+      dockerfile: AS.FOS.Order.API/Dockerfile
+    container_name: order-api-service
+    restart: always
+    ports:
+      - "5215:80"
+      - "7134:443"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__OrderDb: Host=orderdb;Database=orderDB;Username=postgres;Password=postgres
+      RabbitMq__Host: rabbitmq-messaging
+      RabbitMq__Username: guest
+      RabbitMq__Password: guest
+    depends_on:
+      - orderdb
+      - rabbitmq-messaging
+    networks:
+      - shared-network
+
+  orderdb:
+    image: postgres:14
+    container_name: orderdb
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: orderDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - orderdb_data:/var/lib/postgresql/data
+      - ./AS.FOS.Order.Persistence/Scripts:/docker-entrypoint-initdb.d
+    networks:
+        - shared-network
+
+  rabbitmq-messaging:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-messaging
+    restart: always
+    ports:
+      - "5672:5672"     
+      - "15672:15672"   
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    networks:
+        - shared-network
+
+volumes:
+  orderdb_data:
+
+networks:
+  shared-network:
+    driver: bridge
