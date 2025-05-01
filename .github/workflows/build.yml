@@ -46,5 +46,5 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     - name: Execute unit tests
-      run: dotnet test ${{ Test_Project_Path }}
+      run: dotnet test $env:Test_Project_Path
 
