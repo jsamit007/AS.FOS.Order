@@ -10,4 +10,5 @@ public enum OrderStatus
     Confirmed,
     Approved,
     Initiated,
+    PaymentFailed
 }

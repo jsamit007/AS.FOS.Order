@@ -2,7 +2,7 @@
 using AS.FOS.App.Common.Domain.Event;
 using MassTransit;
 
-namespace AS.FOS.Order.Infrastructure.Messaging.Bus;
+namespace AS.FOS.Order.Infrastructure.Messaging.Publisher;
 
 internal class MassTransitEventPublisher : IEventPublisher
 {

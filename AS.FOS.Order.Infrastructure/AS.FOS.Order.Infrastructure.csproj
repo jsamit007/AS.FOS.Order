@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AS.FOS.App.Common\AS.FOS.App.Common.csproj" />
+    <ProjectReference Include="..\AS.FOS.Order.Application\AS.FOS.Order.Application.csproj" />
   </ItemGroup>
 
 </Project>

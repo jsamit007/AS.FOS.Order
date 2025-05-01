@@ -1,5 +1,7 @@
 ﻿using AS.FOS.App.Common.Application.Events;
-using AS.FOS.Order.Infrastructure.Messaging.Bus;
+using AS.FOS.App.Common.Events.Topics;
+using AS.FOS.Order.Infrastructure.Messaging.Consumer;
+using AS.FOS.Order.Infrastructure.Messaging.Publisher;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,8 @@ public static class DependencyInjection
 
         services.AddMassTransit(x =>
         {
+            x.AddConsumer<PaymentFailedConsumer>();
+            x.AddConsumer<PaymentSucceededConsumer>();
             x.SetKebabCaseEndpointNameFormatter();
 
             x.UsingRabbitMq((context, cfg) =>
@@ -25,6 +29,12 @@ public static class DependencyInjection
                 });
 
                 cfg.ConfigureEndpoints(context);
+
+                cfg.ReceiveEndpoint(Topics.PaymentOrderPaymentResponseTopic,evt =>
+                {
+                    evt.ConfigureConsumer<PaymentFailedConsumer>(context);
+                    evt.ConfigureConsumer<PaymentSucceededConsumer>(context);
+                });
             });
         });
 

@@ -71,5 +71,14 @@ public class OrderEntity : AggregateRoot<OrderId>
         Status = OrderStatus.Paid;
         AddDomainEvent(new OrderPaidDomainEvent(this));
     }
+
+    public void Fail()
+    {
+        if (Status != OrderStatus.Pending)
+            throw new InvalidOperationException("Only pending orders can be failed.");
+
+        Status = OrderStatus.PaymentFailed;
+        AddDomainEvent(new OrderPaidDomainEvent(this));
+    }
 }
 
