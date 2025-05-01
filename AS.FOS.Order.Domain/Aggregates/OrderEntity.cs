@@ -2,6 +2,7 @@
 using AS.FOS.App.Common.Domain.Entity;
 using AS.FOS.App.Common.Domain.Enums;
 using AS.FOS.App.Common.Domain.ValueObject;
+using AS.FOS.App.Common.Events.Order;
 using AS.FOS.Order.Domain.Entities;
 using AS.FOS.Order.Domain.Events;
 using AS.FOS.Order.Domain.ValueObjects;
@@ -45,12 +46,11 @@ public class OrderEntity : AggregateRoot<OrderId>
         if (Status != OrderStatus.Pending)
             throw new InvalidOperationException("Only pending orders can be initiated.");
 
-        AddDomainEvent(new OrderCreatedDomainEvent 
+        AddDomainEvent(new OrderCreatedEvent 
         {
             CustomerId = CustomerId.Value,
             OrderId = Id.Value,
-            Amount = _items.Sum(i => i.Price * i.Quantity),
-            ResturantId = RestaurantId.Value
+            Amount = _items.Sum(i => i.Price * i.Quantity)
         });
     }
 

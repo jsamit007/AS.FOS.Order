@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\AS.FOS.App.Common\AS.FOS.App.Common.csproj" />
     <ProjectReference Include="..\AS.FOS.Order.Application\AS.FOS.Order.Application.csproj" />
+    <ProjectReference Include="..\AS.FOS.Order.Saga.Persistence\AS.FOS.Order.Saga.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

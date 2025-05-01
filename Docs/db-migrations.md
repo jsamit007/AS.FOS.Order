@@ -24,3 +24,16 @@ dotnet ef migrations script `
   --output order.sql `
   --idempotent
 ```
+
+dotnet ef migrations add InitialCommit `
+  --project AS.FOS.Order.Saga.Persistence `
+  --startup-project AS.FOS.Order.API `
+  --output-dir Migrations `
+  --context SagaDBcontext
+
+dotnet ef migrations script `
+  --project AS.FOS.Order.Saga.Persistence `
+  --startup-project AS.FOS.Order.API `
+  --output ./AS.FOS.Order.Saga.Persistence/Scripts/order.sql `
+  --idempotent `
+  --context SagaDBcontext

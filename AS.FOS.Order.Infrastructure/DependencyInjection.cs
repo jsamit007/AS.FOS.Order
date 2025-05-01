@@ -2,7 +2,11 @@
 using AS.FOS.App.Common.Events.Topics;
 using AS.FOS.Order.Infrastructure.Messaging.Consumer;
 using AS.FOS.Order.Infrastructure.Messaging.Publisher;
+using AS.FOS.Order.Infrastructure.Saga.Machine;
+using AS.FOS.Order.Saga;
+using AS.FOS.Order.Saga.Persistence;
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +23,9 @@ public static class DependencyInjection
             x.AddConsumer<PaymentFailedConsumer>();
             x.AddConsumer<PaymentSucceededConsumer>();
             x.SetKebabCaseEndpointNameFormatter();
+
+            x.AddSagaStateMachine<OrderStateMachine, OrderState>()
+            .AddSagaEntityFramework(config);
 
             x.UsingRabbitMq((context, cfg) =>
             {

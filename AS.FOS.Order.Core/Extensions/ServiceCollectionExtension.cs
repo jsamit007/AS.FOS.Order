@@ -1,4 +1,5 @@
-﻿using AS.FOS.Order.Persistence;
+﻿using AS.FOS.Order.Application;
+using AS.FOS.Order.Persistence;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ public static class ServiceCollectionExtension
 
     public static IServiceCollection AddModuleService(this IServiceCollection services, IConfigurationManager configuration)
     {
+        services.AddApplicationServices();
         services.AddInfrastructureServices(configuration);
         services.AddPersistence(configuration);
         return services;

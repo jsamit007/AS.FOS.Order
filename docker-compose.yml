@@ -33,7 +33,7 @@ services:
       - "5432:5432"
     volumes:
       - orderdb_data:/var/lib/postgresql/data
-      - ./AS.FOS.Order.Persistence/Scripts:/docker-entrypoint-initdb.d
+      - ./AS.FOS.Order.API/Scripts:/docker-entrypoint-initdb.d
     networks:
         - shared-network
 

@@ -18,11 +18,11 @@ public static class DependencyInjection
         services.AddDbContext<OrderDBContext>(options =>
         {
             var connection = configuration.GetConnectionString("OrderDb");
-            options.UseNpgsql(connection)
-                .EnableSensitiveDataLogging()
-                .LogTo(Console.WriteLine, LogLevel.Information);
-
             options.UseNpgsql(connection);
+                //.EnableSensitiveDataLogging()
+                //.LogTo(Console.WriteLine, LogLevel.Information);
+
+            //options.UseNpgsql(connection);
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
